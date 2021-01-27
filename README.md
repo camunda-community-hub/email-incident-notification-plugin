@@ -430,7 +430,7 @@ Start the application. Now you should receive e-mails in case of incidents.
 
 ## Where can I find an example of incident listener running in Spring Boot?
 
-You can use the [incident-listener-spring-boot-demo](https://gitlab.prod.jit.lan/d.pisarenko/incident-listener-spring-boot-demo/-/tags)
+You can use the [incident-listener-spring-boot-demo](https://github.com/jit-open/incident-listener-spring-boot-demo/tags)
 demo application. It has two tags:
 
  * `Initial_Version` is the version of the application without incident listener
