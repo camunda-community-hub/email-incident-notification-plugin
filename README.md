@@ -454,10 +454,10 @@ section of the Camunda Modeler. There should be two `In Mappings` for `incidentN
 ![How to pass incident listener variables to subprocesses][subprocess]
 
 You can find an example in [subprocess_example_parent.bpmn](docs/subprocess_example_parent.bpmn). You can also see it
-in action in the [Spring Boot example](https://gitlab.prod.jit.lan/d.pisarenko/incident-listener-spring-boot-demo). To
+in action in the [Spring Boot example](https://github.com/jit-open/incident-listener-spring-boot-demo/). To
 do so, 
 
-1. open [subprocess_example_parent.bpmn](https://gitlab.prod.jit.lan/d.pisarenko/incident-listener-spring-boot-demo/blob/master/src/main/resources/subprocess_example_parent.bpmn),
+1. open [subprocess_example_parent.bpmn](https://github.com/jit-open/incident-listener-spring-boot-demo/blob/master/src/main/resources/subprocess_example_parent.bpmn),
 2. in the activity `Set up incident listener` change the variables `incidentNotificationReceiver` and `incidentNotificationCc` to actual e-mail addresses,
 3. start the application, and
 4. start the `Subprocess Example (Parent)` process in the task list.
