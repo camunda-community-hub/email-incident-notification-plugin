@@ -248,10 +248,10 @@ camunda/camunda-bpm-platform:tomcat-7.14.0
 
 ### Step 3
 
-Check out the [code of the demo application](https://gitlab.prod.jit.lan/d.pisarenko/incident-listener-demo-app) into 
+Check out the [code of the demo application](https://github.com/jit-open/incident-listener-tomcat-demo) into 
 directory `<directory-1>`. 
 
-In the BPMN file `incident-listener-demo-app/src/main/resources/sample-process.bpmn`, activity `Set up incident listener`,
+In the BPMN file `incident-listener-tomcat-app/src/main/resources/sample-process.bpmn`, activity `Set up incident listener`,
 change the values of output parameters `incidentNotificationReceiver` and `incidentNotificationCc` to their
 respective values.
 
