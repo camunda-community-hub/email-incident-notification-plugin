@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpm-platform xmlns="http://www.camunda.org/schema/1.0/BpmPlatform" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.camunda.org/schema/1.0/BpmPlatform http://www.camunda.org/schema/1.0/BpmPlatform ">
+
+  <job-executor>
+    <job-acquisition name="default" />
+  </job-executor>
+
+  <process-engine name="default">
+    <job-acquisition>default</job-acquisition>
+    <configuration>org.camunda.bpm.engine.impl.cfg.StandaloneProcessEngineConfiguration</configuration>
+    <datasource>java:jdbc/ProcessEngine</datasource>
+
+    <properties>
+      <property name="history">full</property>
+      <property name="databaseSchemaUpdate">true</property>
+      <property name="authorizationEnabled">true</property>
+      <property name="jobExecutorDeploymentAware">true</property>
+      <property name="historyCleanupBatchWindowStartTime">00:01</property>
+    </properties>
+
+    <plugins>
+      <!-- plugin enabling Process Application event listener support -->
+      <plugin>
+        <class>org.camunda.bpm.application.impl.event.ProcessApplicationEventListenerPlugin</class>
+      </plugin>
+
+      <!-- plugin enabling integration of camunda Spin -->
+      <plugin>
+        <class>org.camunda.spin.plugin.impl.SpinProcessEnginePlugin</class>
+      </plugin>
+
+      <!-- plugin enabling connect support -->
+      <plugin>
+        <class>org.camunda.connect.plugin.impl.ConnectProcessEnginePlugin</class>
+      </plugin>
+
+
+      <plugin>
+          <class>at.jit.incidentlistener.CustomIncidentHandlerPlugin</class>
+	  <properties>
+               <property name="intervalMs">300000</property>
+               <property name="url">https://myserver.com/camunda</property>
+               <property name="fallbackMailReceiver">recipient1@provider.com,recipient2@provider.com</property>
+               <property name="username">MyUserName</property>
+               <property name="password">XXXXXXXXXXXXX</property>
+               <property name="subject">Incident Report Camunda</property>
+               <property name="host">mailserver-host</property>
+               <property name="port">587</property>
+               <property name="mailSender">camunda@mycompany.at</property>
+               <property name="mailBodyTemplate">An error occured in at least one of your processes!
+Please check the following processes in your Camunda Cockpit:
+
+@INCIDENTS
+
+******************** AUTOMATED MESSAGE ********************
+</property>
+               <property name="incidentTemplate">Process Activity: @ACTIVITY
+Process Instance ID: @PROCESS_INSTANCE_ID
+Incident Message: @MESSAGE
+Incident Type: @INCIDENT_TYPE
+Time of Occurrence: @TIME
+Link to Process Instance: @URL
+</property>
+	  </properties>
+      </plugin>
+
+    </plugins>
+  </process-engine>
+</bpm-platform>

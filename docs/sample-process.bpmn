@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_0li2rrs" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="4.4.0">
+  <bpmn:process id="test-incident-listener" name="Test Incident Listener" isExecutable="true">
+    <bpmn:startEvent id="StartEvent_1" camunda:asyncBefore="true">
+      <bpmn:outgoing>SequenceFlow_045qrrx</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:endEvent id="EndEvent_1n63yh0" camunda:asyncBefore="true">
+      <bpmn:incoming>SequenceFlow_0vis2he</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_0vis2he" sourceRef="Task_0uzbqvj" targetRef="EndEvent_1n63yh0" />
+    <bpmn:sequenceFlow id="SequenceFlow_045qrrx" sourceRef="StartEvent_1" targetRef="Task_1pmlstj" />
+    <bpmn:serviceTask id="Task_0uzbqvj" name="Raise incident" camunda:asyncBefore="true" camunda:class="at.jit.incidentlistener.RaiseIncident">
+      <bpmn:incoming>SequenceFlow_0y92tg8</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0vis2he</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0y92tg8" sourceRef="Task_1pmlstj" targetRef="Task_0uzbqvj" />
+    <bpmn:serviceTask id="Task_1pmlstj" name="Set up incident listener" camunda:asyncBefore="true" camunda:class="at.jit.incidentlistener.SetupIncidentListener">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="incidentNotificationReceiver">d.pisarenko@jit.at</camunda:outputParameter>
+          <camunda:outputParameter name="incidentNotificationCc">dmitri.pisarenko@gmail.com,dp@dpisarenko.com</camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>SequenceFlow_045qrrx</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0y92tg8</bpmn:outgoing>
+    </bpmn:serviceTask>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="test-incident-listener">
+      <bpmndi:BPMNEdge id="SequenceFlow_0y92tg8_di" bpmnElement="SequenceFlow_0y92tg8">
+        <di:waypoint x="349" y="121" />
+        <di:waypoint x="581" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_045qrrx_di" bpmnElement="SequenceFlow_045qrrx">
+        <di:waypoint x="192" y="121" />
+        <di:waypoint x="249" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SequenceFlow_0vis2he_di" bpmnElement="SequenceFlow_0vis2he">
+        <di:waypoint x="681" y="121" />
+        <di:waypoint x="731" y="121" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
+        <dc:Bounds x="156" y="103" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="EndEvent_1n63yh0_di" bpmnElement="EndEvent_1n63yh0">
+        <dc:Bounds x="731" y="103" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_1vnfo27_di" bpmnElement="Task_0uzbqvj">
+        <dc:Bounds x="581" y="81" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="ServiceTask_05zj0xv_di" bpmnElement="Task_1pmlstj">
+        <dc:Bounds x="249" y="81" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
