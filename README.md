@@ -68,7 +68,7 @@ of the incident listener repository.
 ### Step 4
 
 Build the JAR file using `mvn clean package`. This will create the file 
-`incident-listener-1.0.0--jar-with-dependencies.jar` in the directory
+`incident-listener-1.0.0-jar-with-dependencies.jar` in the directory
 `target`.
 
 ### Step 5
