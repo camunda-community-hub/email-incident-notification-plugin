@@ -68,7 +68,7 @@ of the incident listener repository.
 ### Step 4
 
 Build the JAR file using `mvn clean package`. This will create the file 
-`incident-listener-0.0.1-SNAPSHOT-jar-with-dependencies.jar` in the directory
+`incident-listener-1.0.0-jar-with-dependencies.jar` in the directory
 `target`.
 
 ### Step 5
@@ -226,7 +226,7 @@ Create a batch `run.bat` file with following contents:
 docker run -d ^
 -p 8080:8080 ^
 -v <directory-1>/incident-listener-demo-app-1.0-SNAPSHOT.war:/camunda/webapps/incident-listener-demo-app.war ^
--v <directory-2>/incident-listener-0.0.1-SNAPSHOT-jar-with-dependencies.jar:/camunda/lib/incident-listener-plugin.jar ^
+-v <directory-2>/incident-listener-1.0.0-jar-with-dependencies.jar:/camunda/lib/incident-listener-plugin.jar ^
 -v <directory-3>/bpm-platform.xml:/camunda/conf/bpm-platform.xml ^
 camunda/camunda-bpm-platform:tomcat-7.14.0
 ```
@@ -241,7 +241,7 @@ Here is a real-life example of such file:
 docker run -d ^
 -p 8080:8080 ^
 -v C:/usr/dp/dev/incident-listener-demo-app/target/incident-listener-demo-app-1.0-SNAPSHOT.war:/camunda/webapps/incident-listener-demo-app.war ^
--v C:/usr/dp/dev/incident-listener-a1/target/incident-listener-0.0.1-SNAPSHOT-jar-with-dependencies.jar:/camunda/lib/incident-listener-plugin.jar ^
+-v C:/usr/dp/dev/incident-listener-a1/target/incident-listener-1.0.0-jar-with-dependencies.jar:/camunda/lib/incident-listener-plugin.jar ^
 -v C:/usr/dp/dev/incident-listener-example-tomcat/bpm-platform.xml:/camunda/conf/bpm-platform.xml ^
 camunda/camunda-bpm-platform:tomcat-7.14.0
 ```
@@ -310,7 +310,7 @@ Add the dependency of the incident listener to the `pom.xml` file of your Spring
 <dependency>
     <groupId>at.jit</groupId>
     <artifactId>incident-listener</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
@@ -464,7 +464,7 @@ do so,
 
 ## Versions
 
-TODO
+ * `1.0.0`: Initial version.
 
 ## Maintainer
 
