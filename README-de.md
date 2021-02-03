@@ -401,7 +401,7 @@ Ein Beispiel dafür finden Sie in [subprocess_example_parent.bpmn](docs/subproce
 
  * `1.0.0`: Erstfassung.
 
-## Contributors
+## Mitwirkende
 
  * Dmitrii Pisarenko
  * Miguel De los Santos La Paz
