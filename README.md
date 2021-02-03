@@ -1,5 +1,7 @@
 # E-mail Incident Notification Plugin
 
+This page is available in English (this document) and [German](README-de.md).
+
 ## How can it benefit you?
 
 The purpose of this plugin is to notify people about incidents in Camunda
@@ -152,8 +154,6 @@ others -- `alice@yourcompany.com`.
 Other things being equal, this means that every five minutes
 at most 2 e-mails (one to `bob@yourcompany.com`, one to 
 `alice@yourcompany.com`) will be sent.
-
-Interval in milliseconds
 
 #### Configuration parameter `url`
 
@@ -466,13 +466,10 @@ do so,
 
  * `1.0.0`: Initial version.
 
-## Maintainer
-
-TODO
-
 ## Contributors
 
-TODO
+ * Dmitrii Pisarenko
+ * Miguel De los Santos La Paz
 
 ## Sponsor
 
