@@ -206,7 +206,7 @@ camunda/camunda-bpm-platform:tomcat-7.14.0
 
 ### Schritt 3
 
-Klonen (`git clone`) Sie den [Code der Demo-Anwendung](https://gitlab.prod.jit.lan/d.pisarenko/incident-listener-demo-app) in das Verzeichnis `<directory-1>`. 
+Klonen (`git clone`) Sie den [Code der Demo-Anwendung](https://github.com/jit-open/incident-listener-tomcat-demo) in das Verzeichnis `<directory-1>`. 
 
 Setzen Sie die Ausgabeparameter `incidentNotificationReceiver` und `incidentNotificationCc` in der BPMN-Datei `incident-listener-demo-app/src/main/resources/sample-process.bpmn`, Aktivität `Set up incident listener` auf die jeweiligen Werte.
 
