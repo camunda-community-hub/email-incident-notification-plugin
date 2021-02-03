@@ -199,7 +199,7 @@ Hier ist ein Beispiel einer solchen Batch-Datei:
 docker run -d ^
 -p 8080:8080 ^
 -v C:/usr/dp/dev/incident-listener-demo-app/target/incident-listener-demo-app-1.0-SNAPSHOT.war:/camunda/webapps/incident-listener-demo-app.war ^
--v C:/usr/dp/dev/incident-listener-a1/target/incident-listener-0.0.1-SNAPSHOT-jar-with-dependencies.jar:/camunda/lib/incident-listener-plugin.jar ^
+-v C:/usr/dp/dev/incident-listener/target/incident-listener-0.0.1-SNAPSHOT-jar-with-dependencies.jar:/camunda/lib/incident-listener-plugin.jar ^
 -v C:/usr/dp/dev/incident-listener-example-tomcat/bpm-platform.xml:/camunda/conf/bpm-platform.xml ^
 camunda/camunda-bpm-platform:tomcat-7.14.0
 ```
