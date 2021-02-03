@@ -381,7 +381,7 @@ Sie können die Demo-Anwendung [incident-listener-spring-boot-demo](https://gith
  * `Initial_Version` ist die ursprüngliche Version der Anwendung ohne Plugin.
  * `Incident_Listener_Works` ist die Version, in der das Plugin teilweise eingerichtet ist. Damit es funktioniert, benennen Sie bitte die Datei `src/main/resources/application.yaml-template` in `application.yaml` um und ersetzen Sie die `TODO`-Platzhalter durch die jeweiligen Werte. Stellen Sie danach die Adressen der Empfänger der Fehler-E-Mails in `src/main/resources/sample-process.bpmn` ein (Aktivität `Set up incident listener`, Registerkarte `Input/Output`, Abschnitt `Output`). Danach können Sie die Anwendung starten und das Plugin sollte funktionieren.
 
-## Ich habe ein Prozess mit vielen Call Activities. Wie kann ich die Empfänger der Fehler-E-Mails so konfigurieren, dass sie nur ein Mal definiert und dann in Unterprozessen wiederverwendet werden?
+## Ich habe einen Prozess mit vielen Call Activities. Wie kann ich die Empfänger der Fehler-E-Mails so konfigurieren, dass sie nur ein Mal definiert und dann in Unterprozessen wiederverwendet werden?
 
 Um sicherzustellen, dass die Einstellungen des Plugins an die Unterprozesse übertragen werden, fügen Sie `In Mappings` im Abschnitt `Variables` im Camunda Modeler hinzu. Es muss zwei Mappings für `incidentNotificationReceiver` und `incidentNotificationCc` geben. In beiden Fällen sind folgende Einstellungen zu verwenden:
 
