@@ -37,15 +37,15 @@
 
 ### Шаг 1
 
-Find out the Camunda version of your target system (system where you want to install the incident listener).
+Определите версию Камунды в вашей целевой системе (той системе, где вы хотите установить плагин).
 
 ### Шаг 2
 
-Check out this Git repository.
+Клонируйте (`git clone`) это хранилище.
 
 ### Шаг 3
 
-Check the Camunda version (property `camunda.version`) in the [pom.xml](pom.xml) file:
+Проверьте версью Камунды (свойство `camunda.version`) в файле [pom.xml](pom.xml):
 
 ```xml
     <properties>
@@ -56,26 +56,21 @@ Check the Camunda version (property `camunda.version`) in the [pom.xml](pom.xml)
     </properties>
 ```
 
-If it matches the version from step 1, continue with step 4. Otherwise you need to adapt `camunda.version` in `pom.xml`
-of the incident listener repository.
+Если она совпадает с версией из шага 1, переходите к шагу 4. Если не совпадает, Вам нужно изменить свойство `camunda.version` в файле `pom.xml` в хранилище плагина.
 
 ### Шаг 4
 
-Build the JAR file using `mvn clean package`. This will create the file 
-`incident-listener-1.0.0-jar-with-dependencies.jar` in the directory
-`target`.
+Соберите файл JAR с помощью `mvn clean package`. После этого вызова файл `incident-listener-1.0.0-jar-with-dependencies.jar` появится в директории `target`.
 
 ### Шаг 5
 
-Place the JAR file from step 4 into the `lib` directory of your Tomcat installation
-(e. g. `camunda/apache-tomcat-9.0.37/lib`).
+Поместите файл JAR из шага 4 в директорию `lib` вашего Томката (например, `camunda/apache-tomcat-9.0.37/lib`).
 
 ### Шаг 6
 
-Open the configuration file `bpm-platform.xml` (e. g.
-`camunda/apache-tomcat-9.0.37/conf/bpm-platform.xml`).
+Откройте конфигурационный файл `bpm-platform.xml` (например, `camunda/apache-tomcat-9.0.37/conf/bpm-platform.xml`).
 
-Add a plugin configuration entry to this file:
+Добавьте раздел конфигурации плагина в этот файл:
 
 ````xml
       <plugin>
@@ -108,57 +103,37 @@ Link to Process Instance: @URL
       </plugin>
 ````
 
-Individual settings are described below.
+Параметры описаны ниже.
 
-#### Configuration parameter `intervalMs`
+#### Параметр `intervalMs`
 
-Interval in milliseconds in which the incident listener
-checks whether or not there are incidents to report.
+Интервал в миллисекундах, в котором плагин проверяет, есть ли инциденты, о которых надо оповестить.
 
-If `intervalMs` is equal to 1 minute (60000 milliseconds), e-mails
-will be sent at most every minute (provided that there are 
-incidents to report). That is, if there is a process in which
-an incident occurs every second, e-mails will be sent every
-minute.
+Если `intervalMs` равен одной минуте (60000 миллисекунд), сообщения будут отправляться максимум раз в минуту (при условии, что есть инциденты, о которых надо сообщить). То есть, если у вас процесс, в котором инциденты происходят каждую секунду, электронные письма будут отправляться каждую минуту.
 
-If `intervalMs` is set to 5 minutes (300000 milliseconds) and
-incidents occur every second, e-mails will be sent every five
-minutes.
+Если `intervalMs` установлен на 5 минут (300000 миллисекунд) и инциденты происходят каждую секунду, электронные письма будут отправляться каждые пять минут.
 
-How many e-mails will be sent each time depends -- apart from
-`intervalMs` and the presence of new incidents -- how many
-address/CC pairs there are.
+Сколько писем будет отправлено каждый раз зависит -- кроме значения `intervalMs` и наличия новых инцидентов -- от количества пар адрес/CC-адрес.
 
-Imagine, 
+Допустим,
 
-   * the processes are configured so that all incident e-mails
-are sent to `bob@yourcompany.com`,
-   * incidents occur every second, and
-   * `intervalMs` is set to 5 minutes (`300000` milliseconds).
+   * процессы настроены таким образом, что все сообщения об инцидентах отправляются по адресу `bob@yourcompany.com`,
+   * инциденты происходят каждую секунду и
+   * `intervalMs` установлен на 5 минут (300000 milliseconds).
 
-In this case, one e-mail will be sent to `bob@yourcompany.com` 
-every five minutes.
+В этом случае каждые пять минут по адресу `bob@yourcompany.com` будет отправляться одно письмо.
 
-Now imagine that in some processes the incident e-mail
-recipient is `bob@yourcompany.com`, and in 
-others -- `alice@yourcompany.com`.
+А теперь представьте, что в одних процессах получатель писем об инцидентах равен `bob@yourcompany.com`, а в других -- `alice@yourcompany.com`.
 
-Other things being equal, this means that every five minutes
-at most 2 e-mails (one to `bob@yourcompany.com`, one to 
-`alice@yourcompany.com`) will be sent.
+При прочих равных, это значит, что каждые пять минут будет отправляться максимум 2 письма (один по адресу `bob@yourcompany.com`, второй по адресу `alice@yourcompany.com`).
 
-#### Configuration parameter `url`
+#### Параметр `url`
 
-URL of the Camunda cockpit of the Camunda instance in question.
-It is used to create a link to the incident page in Camunda
-cockpit.
+Ссылка на кокпит Камунды. Она используется для того, чтобы создать ссылку на инцидент в кокпите Камунды.
 
-#### Configuration parameter `fallbackMailReceiver`
+#### Параметр `fallbackMailReceiver`
 
-Comma-separated list of e-mail addresses to which incident
-e-mails are sent, if no recipients are configured in 
-the BPMN diagram of the process where the incident
-occured.
+Список адресов, разделенный запятыми (`,`), на которые должны отправляться письма об инцидентах, если получатели не установлены в диаграмме BPMN того процесса, где произошел инцидент.
 
 #### Configuration parameter `username`
 
