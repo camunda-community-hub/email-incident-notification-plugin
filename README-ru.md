@@ -1,57 +1,49 @@
-# E-mail Incident Notification Plugin
+# Плагин для оповещения о сбоях по электронной почте
 
-This page is available in English (this document) and [German](README-de.md).
+## Как он может вам помочь?
 
-## How can it benefit you?
+Предназначение этого плагина -- оповещать пользователей об инцидентах в процессах Камунды по электронной почте.
 
-The purpose of this plugin is to notify people about incidents in Camunda
-processes via e-mail.
+## Как он работает?
 
-## How does it work?
+Когда происходит инцидент, его данные сохраняются в связном списке (см. метод `BufferingIncidentHandler.handleIncident`).
 
-Whenever an incident occurs, its data are stored in a list (see method `BufferingIncidentHandler.handleIncident`).
+Регулярно, например каждые пять минут, плагин проверяет, есть ли данные об инцидентах в этом списке.
 
-Regularly (e. g. every five minutes), a piece of code checks whether or not there are
-incidents in that list.
+Если есть, он отправляет письма с данными об этих сбоях.
 
-If there are, e-mails are being sent out with the information about the incidents.
+## Как выглядит электронное письмо с данными об инцидентах?
 
-## What does an incident e-mail look like?
+![Пример письма с данными об инцидентах][sample-email]
 
-![Sample e-mail look][sample-email]
+## Кому отправляются электронные письма?
 
-## Whom are the e-mails being sent to?
+Адреса получателей устанавливаются в переменных процесса в файлах BPMN. Вы можете открыть файл [sample-process.bpmn](docs/sample-process.bpmn) в качестве примера.
 
-The e-mail addresses of the recipients are specified via process variables
-in BPMN files. Open [sample-process.bpmn](docs/sample-process.bpmn) for an
-example.
+![Переменные процесса][process-variables]
 
-![Process Variables][process-variables]
+В переменных процесса
 
-The process variables
-
- * `incidentNotificationReceiver` and
+ * `incidentNotificationReceiver` и
  * `incidentNotificationCc`
 
-specify which recipient and CC addresses the incident e-mails should be sent to.
+определяется, каким получателям и по каким "адресам в копии" (CC) должны отправляться электронные письма.
 
-The implementation of the service task `Set up incident listener` can be set to the empty Java Delegate 
-[SetupIncidentListener](src/main/java/at/jit/incidentlistener/SetupIncidentListener.java).
+Реализацией сервис таска `Set up incident listener` может быть пустой делегат (`JavaDelegate`) [SetupIncidentListener](src/main/java/at/jit/incidentlistener/SetupIncidentListener.java).
 
-If the recipient addresses are not specified in the BPMN diagram, fallback addresses in the plugin configuration
-(file `bpm-platform.xml`) are used.
+Если адреса получателей не указаны в диаграмме BPMN, то используются значения по умолчанию, указанные в конфигурации плагина (файл `bpm-platform.xml`).
 
-## How can I install the incident listener plugin with Apache Tomcat?
+## Как я могу установить плагин, если моя Камунда работает внутри Томката?
 
-### Step 1
+### Шаг 1
 
 Find out the Camunda version of your target system (system where you want to install the incident listener).
 
-### Step 2
+### Шаг 2
 
 Check out this Git repository.
 
-### Step 3
+### Шаг 3
 
 Check the Camunda version (property `camunda.version`) in the [pom.xml](pom.xml) file:
 
@@ -67,18 +59,18 @@ Check the Camunda version (property `camunda.version`) in the [pom.xml](pom.xml)
 If it matches the version from step 1, continue with step 4. Otherwise you need to adapt `camunda.version` in `pom.xml`
 of the incident listener repository.
 
-### Step 4
+### Шаг 4
 
 Build the JAR file using `mvn clean package`. This will create the file 
 `incident-listener-1.0.0-jar-with-dependencies.jar` in the directory
 `target`.
 
-### Step 5
+### Шаг 5
 
 Place the JAR file from step 4 into the `lib` directory of your Tomcat installation
 (e. g. `camunda/apache-tomcat-9.0.37/lib`).
 
-### Step 6
+### Шаг 6
 
 Open the configuration file `bpm-platform.xml` (e. g.
 `camunda/apache-tomcat-9.0.37/conf/bpm-platform.xml`).
@@ -207,18 +199,18 @@ for a particular e-mail will be rendered using this template.
 Then, all these texts are concatenated and put instead of the
 `@INCIDENTS` placeholder in `mailBodyTemplate`.
 
-### Step 7
+### Шаг 7
 
 When the configuration file has been saved, restart Tomcat
 using `shutdown.sh` and `startup.sh` scripts.
 
 ## How can I try out the incident listener with minimal effort?
 
-### Step 1
+### Шаг 1
 
 Install Docker.
 
-### Step 2
+### Шаг 2
 
 Create a batch `run.bat` file with following contents:
 
@@ -246,7 +238,7 @@ docker run -d ^
 camunda/camunda-bpm-platform:tomcat-7.14.0
 ```
 
-### Step 3
+### Шаг 3
 
 Check out the [code of the demo application](https://github.com/jit-open/incident-listener-tomcat-demo) into 
 directory `<directory-1>`. 
@@ -260,11 +252,11 @@ respective values.
 
 Then run `mvn install`.
 
-### Step 4
+### Шаг 4
 
 Build the incident listener plugin in `<directory-2>` using `mvn clean package`.
 
-### Step 5
+### Шаг 5
 
 Copy the file [bpm-platform-template.xml](docs/bpm-platform-template.xml) to `<directory-3>` and rename it to 
 `bpm-platform.xml`. Open that file in an editor and navigate to the section where the incident listener plugin is
@@ -282,27 +274,27 @@ Change the properties
  * `port`, and
  * `mailSender`.
 
-### Step 6
+### Шаг 6
 
 Run the batch file `run.bat`.
 
-### Step 7
+### Шаг 7
 
 When the server has started, navigate your browser to http://localhost:8080/camunda. Use the credentials `demo`/`demo`
 to login.
 
-### Step 8
+### Шаг 8
 
 Start the process `Test Incident Listener` in the task list. You should receive an e-mail after the time specified in 
 `intervalMs` passed.
 
 ## How can I install the incident listener plugin with Spring Boot?
 
-### Step 1
+### Шаг 1
 
 Build the incident listener plugin with `mvn clean install`.
 
-### Step 2
+### Шаг 2
 
 Add the dependency of the incident listener to the `pom.xml` file of your Spring Boot project.
 
@@ -314,7 +306,7 @@ Add the dependency of the incident listener to the `pom.xml` file of your Spring
 </dependency>
 ```
 
-### Step 3
+### Шаг 3
 
 Add settings related to the incident listener to `src/main/resources/application.yaml` so that it looks something
 like this:
@@ -355,7 +347,7 @@ incident-listener:
 
 Please substitute `TODO` markers with the actual values of the respective properties.
 
-### Step 4
+### Шаг 4
 
 Create a class with the `org.springframework.context.annotation.Configuration` annotation. Inject the values from
 `application.yaml` into this class. Finally, add a method that creates an instance of the incident listener
@@ -424,7 +416,7 @@ public class IncidentListenerConfig {
 }
 ```
 
-### Step 5
+### Шаг 5
 
 Start the application. Now you should receive e-mails in case of incidents.
 
@@ -486,7 +478,7 @@ Austria
 ![JIT logo][logo]
 
 [logo]: docs/jit_logo.png "JIT Logo"
-[sample-email]: docs/img01.png "Sample incident e-mail"
-[process-variables]: docs/img02.png "Process Variables"
+[sample-email]: docs/img01.png "Пример письма с данными об инцидентах"
+[process-variables]: docs/img02.png "Переменные процесса"
 [subprocess]: docs/img03.png "How to pass incident listener variables to subprocesses"
 [img04]: docs/img04.png "How to change incident listener parameters in the Apache Tomcat demo app"
