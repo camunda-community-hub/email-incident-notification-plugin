@@ -135,49 +135,41 @@ Link to Process Instance: @URL
 
 Список адресов, разделенный запятыми (`,`), на которые должны отправляться письма об инцидентах, если получатели не установлены в диаграмме BPMN того процесса, где произошел инцидент.
 
-#### Configuration parameter `username`
+#### Параметр `username`
 
-User name of the e-mail server (SMTP).
+Имя пользователя почтового сервера (SMTP).
 
-#### Configuration parameter `password`
+#### Параметр `password`
 
-Password of the e-mail server.
+Пароль почтового сервера.
 
-#### Configuration parameter `subject`
+#### Параметр `subject`
 
-Subject of the incident e-mails
+Тема писем с сообщениями об инцидентах.
 
-#### Configuration parameter `host`
+#### Параметр `host`
 
-Address (host) of the e-mail server (SMTP).
+Адрес почтового сервера (SMTP).
 
-#### Configuration parameter `port`
+#### Параметр `port`
 
-Port of the e-mail server.
+Порт почтового сервера.
 
-#### Configuration parameter `mailSender`
+#### Параметр `mailSender`
 
-E-Mail which is written in the `From` field of incident
-e-mails.
+Адрес электронной почты отправителя сообщений об инцидентах.
 
-#### Configuration parameter `mailBodyTemplate`
+#### Параметр `mailBodyTemplate`
 
-Template for the text of the incident e-mails. The placeholder
-`@INCIDENTS` marks the place where information about individual
-incidents will be output to. Each incident will be output as
-specified in the parameter `incidentTemplate`.
+Шаблон тела писем об инцидентах. Текст `@INCIDENTS` обозначает то место, в котором будет отображаться информация об отдельных инцидентах. Данные о каждом инциденте будут отображены согласно шаблону `incidentTemplate`.
 
-#### Configuration parameter `incidentTemplate`
+#### Параметр `incidentTemplate`
 
-Template for each individual incident. Each of the incidents 
-for a particular e-mail will be rendered using this template.
-Then, all these texts are concatenated and put instead of the
-`@INCIDENTS` placeholder in `mailBodyTemplate`.
+Шаблон для отображения данных отдельных инцидентов. Данные о каждом инциденте отображаются согласно этому шаблону. После этого, текст `@INCIDENTS` в шаблоне `mailBodyTemplate` заменяется на объединенные тексты отдельных инцидентов. 
 
 ### Шаг 7
 
-When the configuration file has been saved, restart Tomcat
-using `shutdown.sh` and `startup.sh` scripts.
+После того, как конфигурационный файл был сохранен, перезапустите Томкат с помощьюскриптов `shutdown.sh` и `startup.sh`.
 
 ## How can I try out the incident listener with minimal effort?
 
