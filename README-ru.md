@@ -390,6 +390,8 @@ public class IncidentListenerConfig {
 
 ![Как передавать переменные плагина в подпроцессы][subprocess]
 
+Вы можете найти пример в файле [subprocess_example_parent.bpmn](docs/subprocess_example_parent.bpmn). Также, вы можете попробовать это в действии в [примере на базе Spring Boot](https://github.com/jit-open/incident-listener-spring-boot-demo/).
+
 You can find an example in [subprocess_example_parent.bpmn](docs/subprocess_example_parent.bpmn). You can also see it
 in action in the [Spring Boot example](https://github.com/jit-open/incident-listener-spring-boot-demo/). To
 do so, 
