@@ -379,19 +379,16 @@ public class IncidentListenerConfig {
  * `Initial_Version` -- это версия приложения без плагина.
  * `Incident_Listener_Works` -- это версия, в которой плагин установлен. Чтобы плагин работал, пожалуйста, переименуйте файл `src/main/resources/application.yaml-template` в `application.yaml` и замените маркеры `TODO` в этом файле на соответствующие значения. Установите адреса получателей в файле `src/main/resources/sample-process.bpmn` (активность `Set up incident listener`, вкладка `Input/Output`, панель `Output`). После этого запустите приложение на Spring Boot. Плагин должен работать.
 
+## У меня процесс с большим количеством подпроцессов. Как мне установить получателей писем этого плагина один раз (в процессе, который вызывает подпроцессы)?
 
+Чтобы настройки плагина передавались подпроцессам, нужно добавить соответствия (mappings) в разделе `Variables` Камунда Моделера. Там должны быть два соответствия (`In Mappings`) `incidentNotificationReceiver` и `incidentNotificationCc`.
 
-## I have a process with many call activities. How can I define the incident e-mail recipients once (in the top-level process)?
-
-To make sure that the incident listener settings are passed to the subprocesses, add their mappings in the `Variables`
-section of the Camunda Modeler. There should be two `In Mappings` for `incidentNotificationReceiver` and 
-`incidentNotificationCc`. In both cases, you need to use following settings:
+В обоих случаях, Вам надо установить следующие значения:
 
  * `Type`: `Source`
- * `Source` and `Target` must be set to the name of the respective variable (`incidentNotificationReceiver` and
-   `incidentNotificationCc`).
+ * `Source` и `Target` должны быть равны названию соответствующей переменной (`incidentNotificationReceiver` и `incidentNotificationCc`).
 
-![How to pass incident listener variables to subprocesses][subprocess]
+![Как передавать переменные плагина в подпроцессы][subprocess]
 
 You can find an example in [subprocess_example_parent.bpmn](docs/subprocess_example_parent.bpmn). You can also see it
 in action in the [Spring Boot example](https://github.com/jit-open/incident-listener-spring-boot-demo/). To
@@ -428,5 +425,5 @@ Austria
 [logo]: docs/jit_logo.png "JIT Logo"
 [sample-email]: docs/img01.png "Пример письма с данными об инцидентах"
 [process-variables]: docs/img02.png "Переменные процесса"
-[subprocess]: docs/img03.png "How to pass incident listener variables to subprocesses"
+[subprocess]: docs/img03.png "Как передавать переменные плагина в подпроцессы"
 [img04]: docs/img04.png "Как изменить параметры плагина в демонстрационной программе на базе Apache Tomcat"
