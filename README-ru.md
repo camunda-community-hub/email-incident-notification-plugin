@@ -171,15 +171,15 @@ Link to Process Instance: @URL
 
 После того, как конфигурационный файл был сохранен, перезапустите Томкат с помощьюскриптов `shutdown.sh` и `startup.sh`.
 
-## How can I try out the incident listener with minimal effort?
+## Как я могу попробовать плагин с минимальными усилиями?
 
 ### Шаг 1
 
-Install Docker.
+Установите Докер.
 
 ### Шаг 2
 
-Create a batch `run.bat` file with following contents:
+Создайте файл `run.bat`, который содержит следующее:
 
 ```bat
 docker run -d ^
@@ -190,11 +190,9 @@ docker run -d ^
 camunda/camunda-bpm-platform:tomcat-7.14.0
 ```
 
-`<directory-1>`, `<directory-2>`, and `<directory-3>` are directories with the source code of demo application,
-the incident listener plugin code, and the configuration file, respectively. Below it will be explained what to put into
-each of these directories.
+В директориях `<directory-1>`, `<directory-2>` и `<directory-3>` находится код демонстрационного приложения (`<directory-1>`), код плагина (`<directory-2>`) и конфигурационный файл (`<directory-3>`). Подробнее содержимое этих директорий будет описано ниже.
 
-Here is a real-life example of such file:
+Вот пример такого файла из реальной жизни:
 
 ```bat
 docker run -d ^
@@ -207,31 +205,23 @@ camunda/camunda-bpm-platform:tomcat-7.14.0
 
 ### Шаг 3
 
-Check out the [code of the demo application](https://github.com/jit-open/incident-listener-tomcat-demo) into 
-directory `<directory-1>`. 
+Выгрузите (`git clone`) [код демонстрационного приложения](https://github.com/jit-open/incident-listener-tomcat-demo) в директорию `<directory-1>`.
 
-In the BPMN file `incident-listener-tomcat-app/src/main/resources/sample-process.bpmn`, activity `Set up incident listener`,
-change the values of output parameters `incidentNotificationReceiver` and `incidentNotificationCc` to their
-respective values.
+В файле BPMN `incident-listener-tomcat-app/src/main/resources/sample-process.bpmn`, активность `Set up incident listener`, измение значения параметров `incidentNotificationReceiver` and `incidentNotificationCc`.
 
-![How to change incident listener parameters in the Apache Tomcat demo app][img04]
+![Как изменить параметры плагина в демонстрационной программе на базе Apache Tomcat][img04]
 
-
-Then run `mvn install`.
+После этого запустите `mvn install`.
 
 ### Шаг 4
 
-Build the incident listener plugin in `<directory-2>` using `mvn clean package`.
+Соберите плагин в `<directory-2>` с помощью `mvn clean package`.
 
 ### Шаг 5
 
-Copy the file [bpm-platform-template.xml](docs/bpm-platform-template.xml) to `<directory-3>` and rename it to 
-`bpm-platform.xml`. Open that file in an editor and navigate to the section where the incident listener plugin is
-configured.
+Сделайте копию файла [bpm-platform-template.xml](docs/bpm-platform-template.xml) в директории `<directory-3>` и назовите файл копии `bpm-platform.xml`. Откройте этот файл в редакторе и перейдите к разделу, где конфигурируется плагин.
 
-Set `url` to `http://localhost:8080/camunda` and change the properties
-
-Change the properties
+Присвойте параметру `url` значение `http://localhost:8080/camunda` и измените значения свойств
 
  * `intervalMs`,
  * `fallbackMailReceiver`,
@@ -243,27 +233,25 @@ Change the properties
 
 ### Шаг 6
 
-Run the batch file `run.bat`.
+Запустите файл `run.bat`.
 
 ### Шаг 7
 
-When the server has started, navigate your browser to http://localhost:8080/camunda. Use the credentials `demo`/`demo`
-to login.
+Когда сервер запустится, перейдите в браузере по ссылке http://localhost:8080/camunda. Войдите в приложение с помощью логина и пароля `demo`/`demo`.
 
 ### Шаг 8
 
-Start the process `Test Incident Listener` in the task list. You should receive an e-mail after the time specified in 
-`intervalMs` passed.
+Запустите процесс `Test Incident Listener` в списке задач (task list). После того, как пройдет время, указанное в `intervalMs`, вам должно прийти электронное письмо.
 
-## How can I install the incident listener plugin with Spring Boot?
+## Как я могу установить плагин в приложение на основе Spring Boot?
 
 ### Шаг 1
 
-Build the incident listener plugin with `mvn clean install`.
+Соберите плагин с помощью `mvn clean install`.
 
 ### Шаг 2
 
-Add the dependency of the incident listener to the `pom.xml` file of your Spring Boot project.
+Добавьте зависимость плагина в файл `pom.xml` вашего приложения на основе Spring Boot.
 
 ```xml
 <dependency>
@@ -275,8 +263,7 @@ Add the dependency of the incident listener to the `pom.xml` file of your Spring
 
 ### Шаг 3
 
-Add settings related to the incident listener to `src/main/resources/application.yaml` so that it looks something
-like this:
+Добавьте настройки плагина в файл `src/main/resources/application.yaml` после чего он должен выглядеть примерно так:
 
 ```yaml
 camunda.bpm:
@@ -312,15 +299,13 @@ incident-listener:
     Link to Process Instance: @URL
 ```
 
-Please substitute `TODO` markers with the actual values of the respective properties.
+Пожалуйста замените маркеры `TODO` на соответствующие значения.
 
 ### Шаг 4
 
-Create a class with the `org.springframework.context.annotation.Configuration` annotation. Inject the values from
-`application.yaml` into this class. Finally, add a method that creates an instance of the incident listener
-plugin and initializes it with the data from `application.yaml`.
+Создайте класс с аннотацией `org.springframework.context.annotation.Configuration`. Вставьте (inject) значения из файла `application.yaml` в атрибуты этого класса. Наконец, добавьте метод, который создает экземпляр плагина и инициализирует его значениями из `application.yaml`.
 
-At the end, the class will look like this:
+Ваш класс будет выглядеть примерно так:
 
 ```java
 import at.jit.incidentlistener.CustomIncidentHandlerPlugin;
@@ -385,20 +370,16 @@ public class IncidentListenerConfig {
 
 ### Шаг 5
 
-Start the application. Now you should receive e-mails in case of incidents.
+Запустите приложение. Теперь вам должны приходить электронные сообщения в случае инцидентов.
 
-## Where can I find an example of incident listener running in Spring Boot?
+## Где я могу найти пример плагина, который работает внутри приложения на базе Spring Boot?
 
-You can use the [incident-listener-spring-boot-demo](https://github.com/jit-open/incident-listener-spring-boot-demo/tags)
-demo application. It has two tags:
+Вы можете использовать демонстрационное приложение [incident-listener-spring-boot-demo](https://github.com/jit-open/incident-listener-spring-boot-demo/tags). У него есть два ярлыка:
 
- * `Initial_Version` is the version of the application without incident listener
- * `Incident_Listener_Works` is the version with the incident listener partially set up. In order for it to work, please
-   rename the file `src/main/resources/application.yaml-template` to `application.yaml` and replace `TODO` markers in
-   this file with the actual parameter values. Set the recipient e-mail addresses in 
-   `src/main/resources/sample-process.bpmn` (activity `Set up incident listener`, `Input/Output` tab, `Output` panel). 
-   Thereafter you can start the Spring Boot application and the incident
-   listener should work.
+ * `Initial_Version` -- это версия приложения без плагина.
+ * `Incident_Listener_Works` -- это версия, в которой плагин установлен. Чтобы плагин работал, пожалуйста, переименуйте файл `src/main/resources/application.yaml-template` в `application.yaml` и замените маркеры `TODO` в этом файле на соответствующие значения. Установите адреса получателей в файле `src/main/resources/sample-process.bpmn` (активность `Set up incident listener`, вкладка `Input/Output`, панель `Output`). После этого запустите приложение на Spring Boot. Плагин должен работать.
+
+
 
 ## I have a process with many call activities. How can I define the incident e-mail recipients once (in the top-level process)?
 
@@ -448,4 +429,4 @@ Austria
 [sample-email]: docs/img01.png "Пример письма с данными об инцидентах"
 [process-variables]: docs/img02.png "Переменные процесса"
 [subprocess]: docs/img03.png "How to pass incident listener variables to subprocesses"
-[img04]: docs/img04.png "How to change incident listener parameters in the Apache Tomcat demo app"
+[img04]: docs/img04.png "Как изменить параметры плагина в демонстрационной программе на базе Apache Tomcat"
