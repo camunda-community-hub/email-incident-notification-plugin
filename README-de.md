@@ -6,11 +6,11 @@ Der Zweck dieses Plugins besteht darin, BenutzerInnen über Fehler (incidents) i
 
 ## Wie funktioniert es?
 
-Wenn ein Fehler auftritt, werden seine Daten in einer Liste gespeichert (siehe Methode `BufferingIncidentHandler.handleIncident`).
+Wenn ein Fehler auftritt, werden die Daten in einer Liste gespeichert (siehe Methode `BufferingIncidentHandler.handleIncident`).
 
 In regelmässigen Zeitabständen (z. B. alle fünf Minuten), überprüft eine Routine, ob es Fehlerdaten in dieser Liste gibt.
 
-Ist dies der Fall, werden E-mails mit Informationen über einzelne Fehler, verschickt.
+Ist dies der Fall, werden E-mails mit Informationen zu den einzelnen Fehlern, verschickt.
 
 ## Wie sieht eine E-Mail mit Fehlerinformationen aus?
 
@@ -32,7 +32,7 @@ legen fest, an welche Empfänger- bzw. CC-Adressen die Fehler-Emails verschickt 
 Im Service-Task `Set up incident listener` kann ein leeres `JavaDelegate`
 [SetupIncidentListener](src/main/java/at/jit/incidentlistener/SetupIncidentListener.java) verwendet werden.
 
-Wenn die Adressen im BPMN-Diagramm nicht definiert sind, werden Default-Werte aus der Plugin-Konfiguration (Datei `bpm-platform.xml`) verwendet.
+Wenn die Adressen im BPMN-Diagramm nicht definiert sind, kommen Default-Werte aus der Plugin-Konfiguration (Datei `bpm-platform.xml`) zur Anwendung.
 
 ## Wie kann ich das Plugin installieren, wenn ich Camunda im Apache Tomcat-Server verwende?
 
@@ -114,7 +114,7 @@ Ist `intervalMs` gleich einer Minute (60000 Millisekunden), werden die E-Mails h
 
 Wenn `intervalMs` auf 5 Minuten (300000 Millisekunden) gesetzt ist und Fehler jede Sekunde auftreten, dann werden E-Mails alle 5 Minuten verschickt.
 
-Wieviele E-Mails verschickt jedes Mal verschickt werden, hängt -- außer von `intervalMs` und dem Vorhandensein von Fehlern -- davon ab, wieviele Address- und CC-Paare es gibt.
+Wieviele E-Mails jedes Mal verschickt werden, hängt -- außer von `intervalMs` und dem Vorhandensein von Fehlern -- davon ab, wieviele Address- und CC-Paare es gibt.
 
 Angenommen,
 
@@ -122,11 +122,11 @@ Angenommen,
    * die Fehler jede Sekunde auftreten und
    * `intervalMs` auf 5 Minuten (300000 Millisekunden) gesetzt ist.
 
-In diesem Fall wird jede Minute jeweils eine E-Mail an `bob@yourcompany.com` verschickt werden.
+In diesem Fall wird jede Minute je eine E-Mail an `bob@yourcompany.com` gesendet.
 
-Nehmen wir einen anderen Fall: In einigen Prozessen sollen die Fehler-E-Mail an `bob@yourcompany.com` verschickt werden und in anderen -- an `alice@yourcompany.com`.
+Nehmen wir einen anderen Fall: In einigen Prozessen sollen die Fehler-E-Mail an `bob@yourcompany.com` verschickt werden und in anderen an `alice@yourcompany.com`.
 
-Wenn alles Andere gleich bleibt, dann werden jede Minute höchstens zwei E-Mails (eine an `bob@yourcompany.com`, die zweite an `alice@yourcompany.com`) verschickt.
+Wenn alles Andere gleich bleibt, dann werden jede Minute höchstens zwei E-Mails (eine an `bob@yourcompany.com`, die Zweite an `alice@yourcompany.com`) verschickt.
 
 #### Configuration parameter `url`
 
@@ -191,7 +191,7 @@ docker run -d ^
 camunda/camunda-bpm-platform:tomcat-7.14.0
 ```
 
-`<directory-1>`, `<directory-2>`, and `<directory-3>` sind Verzeichnisse, in denen sich die Demo-Anwendung (`<directory-1>`), das Plugin (`<directory-2>`) und die Konfigurationsdatei (`<directory-3>`) befinden. Unten wird erklärt, was genau in diesen Verzeichnissen stehen soll.
+`<directory-1>`, `<directory-2>`, und `<directory-3>` sind Verzeichnisse, in denen sich die Demo-Anwendung (`<directory-1>`), das Plugin (`<directory-2>`) und die Konfigurationsdatei (`<directory-3>`) befinden. Unten wird erklärt, was genau in diesen Verzeichnissen stehen soll.
 
 Hier ist ein Beispiel einer solchen Batch-Datei:
 
@@ -372,7 +372,7 @@ public class IncidentListenerConfig {
 
 ### Schritt 5
 
-Starten Sie die Anwendung. Sie müssten nun E-Mails bekommen, wenn Fehler auftreten.
+Starten Sie die Anwendung. Falls Fehler auftreten, sollten Sie die entsprechenden Fehler-E-Mails erhalten.
 
 ## Wo kann ich ein Beispiel des Plugins finden, das in einer Spring Boot-Anwendung läuft?
 
