@@ -45,7 +45,7 @@
 
 ### Шаг 3
 
-Проверьте версью Камунды (свойство `camunda.version`) в файле [pom.xml](pom.xml):
+Проверьте версию Камунды (свойство `camunda.version`) в файле [pom.xml](pom.xml):
 
 ```xml
     <properties>
