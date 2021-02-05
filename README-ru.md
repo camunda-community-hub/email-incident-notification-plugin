@@ -390,41 +390,37 @@ public class IncidentListenerConfig {
 
 ![Как передавать переменные плагина в подпроцессы][subprocess]
 
-Вы можете найти пример в файле [subprocess_example_parent.bpmn](docs/subprocess_example_parent.bpmn). Также, вы можете попробовать это в действии в [примере на базе Spring Boot](https://github.com/jit-open/incident-listener-spring-boot-demo/).
+Вы можете найти пример в файле [subprocess_example_parent.bpmn](docs/subprocess_example_parent.bpmn). Также, вы можете попробовать это в действии в [примере на базе Spring Boot](https://github.com/jit-open/incident-listener-spring-boot-demo/). Для этого
 
-You can find an example in [subprocess_example_parent.bpmn](docs/subprocess_example_parent.bpmn). You can also see it
-in action in the [Spring Boot example](https://github.com/jit-open/incident-listener-spring-boot-demo/). To
-do so, 
+1. откройте файл [subprocess_example_parent.bpmn](https://github.com/jit-open/incident-listener-spring-boot-demo/blob/master/src/main/resources/subprocess_example_parent.bpmn),
+2. в активности `Set up incident listener` присвойте переменным `incidentNotificationReceiver` и `incidentNotificationCc` адреса почты,
+3. запустите приложение и
+4. запустите процесс `Subprocess Example (Parent)` в списке задач (task list).
 
-1. open [subprocess_example_parent.bpmn](https://github.com/jit-open/incident-listener-spring-boot-demo/blob/master/src/main/resources/subprocess_example_parent.bpmn),
-2. in the activity `Set up incident listener` change the variables `incidentNotificationReceiver` and `incidentNotificationCc` to actual e-mail addresses,
-3. start the application, and
-4. start the `Subprocess Example (Parent)` process in the task list.
+## Версия
 
-## Versions
+ * `1.0.0`: Первоначальная версия.
 
- * `1.0.0`: Initial version.
+## Авторы
 
-## Contributors
-
- * Dmitrii Pisarenko
+ * Дмитрий Писаренко
  * Miguel De los Santos La Paz
 
-## Sponsor
+## Спонсор
 
 "J-IT" IT-Dienstleistungs GesmbH
 
 Vorgartenstraße 206B
 
-5th floor
+5-й этаж
 
-A-1020 Vienna
+A-1020 Вена
 
-Austria
+Австрия
 
-![JIT logo][logo]
+![Логотип компании JIT][logo]
 
-[logo]: docs/jit_logo.png "JIT Logo"
+[logo]: docs/jit_logo.png "Логотип компании"
 [sample-email]: docs/img01.png "Пример письма с данными об инцидентах"
 [process-variables]: docs/img02.png "Переменные процесса"
 [subprocess]: docs/img03.png "Как передавать переменные плагина в подпроцессы"
