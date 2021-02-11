@@ -17,8 +17,8 @@
     <bpmn:serviceTask id="Task_1pmlstj" name="Set up incident listener" camunda:asyncBefore="true" camunda:class="at.jit.incidentlistener.SetupIncidentListener">
       <bpmn:extensionElements>
         <camunda:inputOutput>
-          <camunda:outputParameter name="incidentNotificationReceiver">d.pisarenko@jit.at</camunda:outputParameter>
-          <camunda:outputParameter name="incidentNotificationCc">dmitri.pisarenko@gmail.com,dp@dpisarenko.com</camunda:outputParameter>
+          <camunda:outputParameter name="incidentNotificationReceiver">email@provider.at</camunda:outputParameter>
+          <camunda:outputParameter name="incidentNotificationCc">email2@provider.at, email3@provider.at</camunda:outputParameter>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_045qrrx</bpmn:incoming>

@@ -1,6 +1,6 @@
 # E-mail Incident Notification Plugin
 
-This page is available in English (this document) and [German](README-de.md).
+This page is available in English (this document), [German](README-de.md), and [Russian](README-ru.md).
 
 ## How can it benefit you?
 
