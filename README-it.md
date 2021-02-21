@@ -438,13 +438,10 @@ nel [esempio con Spring Boot](https://github.com/jit-open/incident-listener-spri
 
  * `1.0.0`: Initial version.
 
-## Maintainer
-
-TODO
-
 ## Contributors
 
-TODO
+ * Dmitrii Pisarenko
+ * Miguel De los Santos La Paz
 
 ## Sponsor
 
